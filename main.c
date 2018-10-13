@@ -1,4 +1,7 @@
 #include <stdio.h>
+double wyznacznik(double k, double l, double m, double n){
+    return k * n - l * m;
+}
 
 void wyswietl_informacje();
 
@@ -6,16 +9,41 @@ void wczytaj_wspolczynniki(double *a1, double *b1, double *c1, double *a2, doubl
 
 int main() {
     double a1, b1, c1, a2, b2, c2;
-
+    double W, Wx, Wy;
+    double x, y;
     wyswietl_informacje();
     wczytaj_wspolczynniki(&a1, &b1, &c1, &a2, &b2, &c2);
 
-// nie SKOŃCZONE !!!
+// SKOŃCZONE !!!
 
 
     printf("Twój układ równań:\n");
-    printf("%5.2lf=x + %5.2lf+y = %5.2\n", a1, b1, c1);
-    printf("%5.2lf=x + %5.2lf+y = %5.2\n", a2, b2, c2);
+    printf("%5.2lf=x + %5.2lf+y = %5.2lf \n", a1, b1, c1);
+    printf("%5.2lf=x + %5.2lf+y = %5.2lf \n", a2, b2, c2);
+    printf("\n");
+
+    W = wyznacznik(a1, a2, b1, b2);
+    Wx = wyznacznik(c1, c2, b1, b2);
+    Wy = wyznacznik(a1, a2, c1, c2);
+
+    printf("Wyznacznik W = %lf\n", W);
+    printf("Wyznacznik Wx = %lf\n", Wx);
+    printf("Wyznacznik Wy = %lf\n", Wy);
+    printf("\n");
+
+    if(W != 0){
+        x = Wx / W;
+        y = Wy / W;
+        printf("Rozwiązanie:\n");
+        printf("x = %5.2lf, y = %5.2lf", x, y);
+        printf("\n");
+    } else{
+        if(Wx != 0.0 || Wy != 0.0){
+            printf("Układ równań sprzeczny - nie ma rozwiązania.");
+        }else{
+            printf("Układ równań nieoznaczony - nieskończenie wiele rozwiązań.");
+        }
+    }
     return 0;
 }
 
